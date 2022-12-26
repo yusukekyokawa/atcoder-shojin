@@ -1,0 +1,2169 @@
+『アルゴリズム的思考力が身につく！ プログラミングコンテストAtCoder入門』
+例題の解答例のソースコード
+
+
+
+●01　Multiplication 1
+
+［コード3.2.6：例題1の解答例（C++）］
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int A, B;
+	cin >> A >> B;
+	cout << A * B << endl;
+}
+
+
+［コード3.2.7：例題1の解答例（Python3）］
+
+A, B = map(int, input().split())
+print(A * B)
+
+
+●02　Product
+
+［コード3.2.12：例題2の解答例（C++）］
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a, b;
+	cin >> a >> b;
+	int c = a * b;
+	if (c % 2 == 0) {
+		cout << "Even" << endl;
+	}
+	else {
+		cout << "Odd" << endl;
+	}
+}
+
+
+［コード3.2.13：例題2の解答例（Python3）］
+
+a, b = map(int, input().split())
+c = a * b
+if c % 2 == 0:
+	print("Even")
+else:
+	print("Odd")
+
+
+［コード3.2.14：例題2の解答例2（Python3）］
+
+a, b = map(int, input().split())
+print("Even" if a * b % 2 == 0 else "Odd")
+
+
+●03　Serval vs Monster
+
+［コード3.2.17：例題3の解答例（C++）］
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int H, A;
+	cin >> H >> A;
+	if (H % A == 0) {
+		cout << H / A << endl;
+	}
+	else {
+		cout << H / A + 1 << endl;
+	}
+}
+
+
+［コード3.2.18：例題3の解答例（Python3）］
+
+H, A = map(int, input().split())
+if H % A == 0:
+	print(H // A)
+else:
+	print(H // A + 1)
+
+
+［コード3.3.3：例題3のwhile文を用いた別解（C++）］
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	// 整数 H, A の値を入力から受け取る
+	int H, A;
+	cin >> H >> A;
+
+	// 攻撃回数を管理する変数
+	int counter = 0;
+
+	// 体力 H が 0 より大きい限り反復を繰り返す
+	while (H > 0) {
+		// H から A を引く
+		H -= A;
+
+		// 攻撃回数を 1 増やす
+		++counter;
+	}
+
+	// 答えを出力する
+	cout << counter << endl;
+}
+
+
+［コード3.3.4：例題3のwhile文を用いた別解（Python3）］
+
+# 整数 H, A の値を入力から受け取る
+H, A = map(int, input().split())
+
+# 攻撃回数を管理する変数
+counter = 0
+
+# 体力 H が 0 より大きい限り反復を繰り返す
+while H > 0:
+	# H から A を引く
+	H -= A
+
+	# 攻撃回数を 1 増やす
+	counter += 1
+
+# 答えを出力する
+print(counter)
+
+
+●04　We Love Golf
+
+［コード3.3.12：例題4の解答例（C++）］
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	// 入力
+	int K, A, B;
+	cin >> K >> A >> B;
+
+	// フラグ：調べた範囲内に K の倍数があったかどうか
+	bool exist = false;
+
+	// i = A, A+1, ..., B を調べる
+	for (int i = A; i <= B; ++i) {
+		// K の倍数が見つかったらフラグをオンにする
+		if (i % K == 0) {
+			exist = true;
+		}
+	}
+
+	// 出力
+	if (exist) {
+		cout << "OK" << endl;
+	}
+	else {
+		cout << "NG" << endl;
+	}
+}
+
+
+［コード3.3.13：例題4の解答例（Python3）］
+
+#K を入力
+K = int(input())
+
+# A, B への入力 (A, B は K と別の行で入力されることに注意)
+A, B = map(int, input().split())
+
+# フラグ：調べた範囲内に K の倍数があったかどうか
+exist = False
+
+# i = A, A+1, ..., B を調べる
+for i in range(A, B + 1):
+	# K の倍数が見つかったらフラグをオンにする
+	if i % K == 0:
+		exist = True
+
+# 出力
+print("OK" if exist else "NG")
+
+
+●05　Some Sums
+
+［コード3.3.18：例題5の解答例（C++）］
+
+#include <iostream>
+using namespace std;
+
+// 整数 n の各桁の和を求める関数
+int calc_sum_digits(int n) {
+	int sum_digit = 0;
+	while (n > 0) {
+		sum_digit += n % 10;
+		n /= 10;
+	}
+	return sum_digit;
+}
+
+int main() {
+	// 入力
+	int N, A, B;
+	cin >> N >> A >> B;
+
+	// 答えを格納する変数
+	int result = 0;
+
+	// 1 以上 N 以下の整数 i を調べていく
+	for (int i = 1; i <= N; ++i) {
+		// 整数 i の「各桁の和」を求める
+		int x = calc_sum_digits(i);
+
+		// 各桁の和がA 以上 B 以下である場合は加算する
+		if (A <= x && x <= B) {
+			result += i;
+		}
+	}
+
+	// 出力
+	cout << result << endl;
+}
+
+
+［コード3.3.19：例題5の解答例（Python3）］
+
+# 整数 n の各桁の和を求める関数
+def calc_sum_digits(n):
+	sum_digit = 0
+	while n > 0:
+		sum_digit += n % 10
+		n //= 10
+	return sum_digit
+
+# 入力
+N, A, B = map(int, input().split())
+
+# 答えを格納する変数
+result = 0
+
+# 1 以上 N 以下の整数 i を調べていく
+for i in range(1, N + 1):
+	# 各桁の和が A 以上 B 以下である場合は加算する
+	if A <= calc_sum_digits(i) <= B:
+		result += i
+
+# 出力
+print(result)
+
+
+［コード3.5.9：例題5の別解（C++）］
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// 整数n の各桁の和を求める関数
+int calc(int n) {
+	string str = to_string(n);
+	int res = 0;
+	for (auto c : str) {
+		res += c - '0';
+	}
+	return res;
+}
+
+int main() {
+	// 入力
+	int N, A, B;
+	cin >> N >> A >> B;
+
+	// 各桁の和が A 以上 B 以下のものを足す
+	int result = 0;
+	for (int i = 1; i <= N; ++i) {
+		int sum = calc(i);
+		if (sum >= A && sum <= B) {
+			result += i;
+		}
+	}
+	cout << result << endl;
+}
+
+
+［コード3.5.10：例題5の別解（Python3）］
+
+# 整数 n の各桁の和を求める関数
+def calc(n):
+	return sum(map(int, str(n)))
+
+# 入力
+N, A, B = map(int, input().split())
+
+# 各桁の和が A 以上 B 以下のものを足す
+print(sum(i for i in range(1, N+1) if A <= calc(i) <= B))
+
+
+●06　Shift Only
+
+［コード3.4.7：例題6の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+	// 入力
+	int N;
+	cin >> N;
+	vector<int> A(N);
+	for (int i = 0; i < N; ++i) {
+		cin >> A[i];
+	}
+
+	// 操作回数
+	int counter = 0;
+
+	// 操作が行えなくなるまで操作を行う
+	while (true) {
+		// 操作が行えるかどうかを判定する
+		bool can_do = true;
+		for (int i = 0; i < N; ++i) {
+			if (A[i] % 2 == 1) {
+				can_do = false;
+			}
+		}
+
+		// 操作を行えないならば、反復を打ち切る
+		if (!can_do) {
+			break;
+		}
+
+		// 操作を行えるならば、操作を行う
+		for (int i = 0; i < N; ++i) {
+			A[i] /= 2;
+		}
+
+		// 操作回数を1増やす
+		++counter;
+	}
+
+	// 出力
+	cout << counter << endl;
+}
+
+
+［コード3.4.8：例題6の解答例（Python3）］
+
+# 入力
+N = int(input())
+A = list(map(int, input().split()))
+
+# 操作回数
+counter = 0
+
+# 操作が行えなくなるまで操作を行う
+while True:
+	# 操作が行えるかどうかを判定する
+	can_do = True
+	for i in range(N):
+		if A[i] % 2 == 1:
+			can_do = False
+
+	# 操作を行えないならば、反復を打ち切る
+	if not can_do:
+		break
+
+	# 操作を行えるならば、操作を行う
+	for i in range(N):
+		A[i] //= 2
+
+	# 操作回数を1増やす
+	counter += 1
+
+# 出力
+print(counter)
+
+
+［コード3.4.12：listの内包表記を活用した例題6の解答例（Python3）］
+
+# 入力
+N = int(input())
+A = list(map(int, input().split()))
+
+# 操作回数
+counter = 0
+
+# 操作が行えなくなるまで操作を行う
+while all(a % 2 == 0 for a in A):
+	# 操作を行う
+	A = [a // 2 for a in A]
+
+	# 操作回数を 1 増やす
+	counter += 1
+
+# 出力
+print(counter)
+
+
+［コード3.4.13：例題6の別解（C++）］
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// 整数 num が 2 で何回割れるか
+int how_many_times(int num) {
+// 2 で割れる回数を表す変数
+	int counter = 0;
+
+	// 2 で割れる限り、割り続ける
+	while (num % 2 == 0) {
+		// num を 2 で割る
+		num /= 2;
+
+		// counter を 1 増やす
+		++counter;
+	}
+	// 返す
+	return counter;
+}
+
+// 十分大きい値
+constexpr int INF = 1 << 30;
+
+int main() {
+	// 入力（配列を範囲for 文で受け取る）
+	int N;
+	cin >> N;
+	vector<int> A(N);
+	for (auto& a : A) {
+		cin >> a;
+	}
+
+	// 答えを表す変数 ( 十分大きい値に初期化しておく)
+	int result = INF;
+
+	// 2 で割れる回数の最小値を求める
+	for (auto a : A) {
+		// 2 で何回割れるか
+		int counter = how_many_times(a);
+
+		// result より counter のほうが小さい場合は更新する
+		result = min(result, counter);
+	}
+
+	// 出力
+	cout << result << endl;
+}
+
+
+［コード3.4.14：例題6の別解（Python3）］
+
+# 整数 num が 2 で何回割れるか
+def how_many_times(num):
+	# 2 で割れる回数を表す変数
+	counter = 0
+
+	# 2 で割れる限り、割り続ける
+	while num % 2 == 0:
+		# num を 2 で割る
+		num //= 2
+
+		# counter を 1 増やす
+		counter += 1
+
+	# 返す
+	return counter
+
+# 十分大きい値
+INF = 2 ** 30
+
+# 入力
+N = int(input())
+A = list(map(int, input().split()))
+
+# 答えを表す変数 ( 十分大きい値に初期化しておく)
+result = INF
+
+# 範囲 for 文を用いる
+for a in A:
+	# 2 で割れる回数の最小値を求める
+	counter = how_many_times(a)
+
+	# result より counter のほうが小さい場合は更新する
+	result = min(result, counter)
+
+# 出力
+print(result)
+
+
+［コード3.4.15：コード3.4.14をさらに簡潔に書く］
+
+# 整数 num が 2 で何回割れるか
+def how_many_times(num):
+	counter = 0
+	while num % 2 == 0:
+		num //= 2
+		counter += 1
+	return counter
+
+# 入力
+N = int(input())
+A = list(map(int, input().split()))
+
+# A の各要素に how_many_times を適用して、最小値をとる
+result = min(map(how_many_times, A))
+
+# 出力
+print(result)
+
+
+●07　Card Game for Two
+
+［コード3.4.22：例題7の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	// 入力（範囲for 文を用いる）
+	int N;
+	cin >> N;
+	vector<int> a(N);
+	for (auto& ai : a) {
+		cin >> ai;
+	}
+
+	// 配列 a の各要素を大きい順にソートする
+	sort(a.begin(), a.end(), greater<int>());
+
+	// 答えを表す変数
+	int result = 0;
+
+	// 配列 a の各要素を交互に足し引きしていく
+	// if 文に変数i を用いるので、範囲for 文にしていない
+	for (int i = 0; i < N; ++i) {
+		if (i % 2 == 0) {
+			result += a[i];
+		}
+		else {
+			result -= a[i];
+		}
+	}
+
+	// 出力
+	cout << result << endl;
+}
+
+
+［コード3.4.23：例題7の解答例（Python3）］
+
+# 入力
+N = int(input())
+a = list(map(int, input().split()))
+
+# 配列 a の各要素を大きい順にソートする
+a.sort(reverse=True)
+
+# 答えを表す変数
+result = 0
+
+# 配列 a の各要素を交互に足し引きしていく
+for i in range(N):
+	if i % 2 == 0:
+		result += a[i]
+	else:
+		result -= a[i]
+
+# 出力
+print(result)
+
+
+●08　AcCepted
+
+［コード3.5.6：例題8の解答例（C++）］
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// 判定関数
+bool isAC(string S) {
+	// S の先頭が 'A' でない場合は false
+	if (S[0] != 'A') {
+		return false;
+	}
+
+	// S の先頭2 文字と末尾1 文字を除いた'C' の個数を調べる
+	int num_c = 0;
+	for (int i = 2; i + 1 < S.size(); ++i) {
+		if (S[i] == 'C') {
+			++num_c;
+		}
+	}
+	if (num_c != 1) {
+		return false;
+	}
+
+	// S に含まれる大文字の個数を調べる
+	int num_big = 0;
+	for (auto c : S) {
+		if (isupper(c)) {
+			++num_big;
+		}
+	}
+	if (num_big != 2) {
+		return false;
+	}
+
+	// 条件をすべて満たせば true
+	return true;
+}
+
+int main() {
+	// 入力
+	string S;
+	cin >> S;
+
+	// 条件を判定して出力
+	if (isAC(S)) {
+		cout << "AC" << endl;
+	}
+	else {
+		cout << "WA" << endl;
+	}	
+}
+
+
+［コード3.5.7：例題8の解答例（Python3）］
+
+# 判定関数
+def isAC(S):
+	# S の先頭が "A" でない場合はFalse
+	if S[0] != "A":
+		return False
+
+	# S の先頭2 文字と末尾1 文字を除いた "C" の個数を調べる
+	if S[2:-1].count("C") != 1:
+		return False
+
+	# S に含まれる大文字の個数を調べる
+	if sum(map(str.isupper, S)) != 2:
+		return False
+
+	# 条件をすべて満たせば True
+	return True
+
+# 入力して判定して出力
+print("AC" if isAC(input()) else "WA")
+
+
+●09　Coins
+
+［コード3.6.5：例題9の解答例（C++）］
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	// 入力
+	int A, B, C, X;
+	cin >> A >> B >> C >> X;
+
+	// 答えを表す変数
+	int result = 0;
+
+	// 全探索
+	for (int a = 0; a <= A; ++a) {
+		for (int b = 0; b <= B; ++b) {
+			for (int c = 0; c <= C; ++c) {
+				//合計金額が X 円に一致したら 1 増やす
+				if (500 * a + 100 * b + 50 * c == X) {
+					++result;
+				}
+			}
+		}
+	}
+
+	// 出力
+	cout << result << endl;
+}
+
+
+［コード3.6.6：例題9の解答例（Python3）］
+
+# 入力
+A = int(input())
+B = int(input())
+C = int(input())
+X = int(input())
+
+# 答えを表す変数
+result = 0
+
+# 全探索
+for a in range(0, A + 1):
+	for b in range(0, B + 1):
+		for c in range(0, C + 1):
+			# 合計金額が X 円に一致したら 1 増やす
+			if 500 * a + 100 * b + 50 * c == X:
+				result += 1
+
+# 出力
+print(result)
+
+
+●10　Minesweeper
+
+［コード3.6.15：例題10の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+// 0: 下、1:右、2:上、3:左、4:右下、5:右上、6:左上、7:左下
+vector<int> DX = {1, 0, -1, 0, 1, -1, -1, 1};
+vector<int> DY = {0, 1, 0, -1, 1, 1, -1, -1};
+
+int main() {
+	// H x W の盤面を入力
+	int H, W;
+	cin >> H >> W;
+	vector<string> S(H);
+	for (auto& row : S) {
+		cin >> row;
+	}
+
+	// 各マス (i, j) を順に処理
+	for (int i = 0; i < H; ++i) {
+		for (int j = 0; j < W; ++j) {
+			// 空きマス以外はそのままにする
+			if (S[i][j] != '.') {
+				continue;
+			}
+
+			// 周囲 8 マスの '#' の個数を数える
+			int counter = 0;
+			for (int d = 0; d < 8; ++d) {
+				// マス (i, j) の周囲のマスを (ni, nj) とする
+				int ni = i + DX[d];
+				int nj = j + DY[d];
+
+				// マス (ni, nj) が盤面外の場合はスキップ
+				if (ni < 0 || ni >= H || nj < 0 || nj >= W) {
+					continue;
+				}
+
+				// # であれば1 増やす
+				if (S[ni][nj] == '#') {
+					++counter;
+				}
+			}
+
+			// マス (i, j) に個数を char 型に変換して記録
+			S[i][j] = '0' + counter;
+		}
+	}
+
+	// 出力
+	for (auto row : S) {
+		cout << row << endl;
+	}
+}
+
+
+［コード3.6.16：例題10の解答例（Python3）］
+
+# 0: 下、1: 右、2: 上、3: 左、4: 右下、5:右上、6:左上、7:左下
+DX = [1, 0, -1, 0, 1, -1, -1, 1]
+DY = [0, 1, 0, -1, 1, 1, -1, -1]
+ 
+# 入力
+H, W = map(int, input().split())
+S = [input() for i in range(H)]
+ 
+# Python3 では str 型変数の各文字の書き換えはできない
+# 答えを表す二次元配列を別途用意する ('.' のところは 0 とする)
+result = [[0 if v == '.' else '#' for v in row] for row in S]
+ 
+# 各マス (i, j) を順に処理
+for i in range(H):
+	for j in range(W):
+# 空きマス以外はそのままにする
+		if S[i][j] != '.':
+			continue
+ 
+# 周囲 8 マスの '#' の個数を数える
+		for dx, dy in zip(DX, DY):
+# マス (i, j) の周囲のマスを (ni, nj) とする
+			ni, nj = i + dx, j + dy
+ 
+# マス (ni, nj) が盤面外の場合はスキップ
+			if ni < 0 or ni >= H or nj < 0 or nj >= W:
+				continue
+ 
+# # であれば1 増やす
+			if S[ni][nj] == '#':
+				result[i][j] += 1
+ 
+# 出力形式に合わせて出力
+for row in result:
+	print(*row, sep='')
+
+
+●11　Otoshidama
+
+［コード5.2.3：例題11の解答例（C++）］
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	// 入力
+	int N, Y;
+	cin >> N >> Y;
+
+	// 答えを格納するための変数
+	int ares = -1, bres = -1, cres = -1;
+
+	// 全探索
+	for (int a = 0; a <= N; ++a) {
+		for (int b = 0; b <= N; ++b) {
+			// c の値が自動的に決まる
+			int c = N - a - b;
+
+			// c が 0 以上 N 以下でない場合はスキップ
+			if (c < 0 || c > N) {
+				continue;
+			}
+
+			// 残りの条件を満たすかを判定
+			if (10000 * a + 5000 * b + 1000 * c == Y) {
+				ares = a;
+				bres = b;
+				cres = c;
+			}
+		}
+	}
+
+	// 出力
+	cout << ares << " " << bres << " " << cres << endl;
+}
+
+
+［コード5.2.4：例題11の解答例（Python3）］
+
+# 入力
+N, Y = map(int, input().split())
+
+# 答えを格納するための変数
+ares, bres, cres = -1, -1, -1
+
+# 全探索
+for a in range(N + 1):
+	for b in range(N + 1):
+		# c の値が自動的に決まる
+		c = N - a - b
+
+		# c が 0 以上 N 以下でない場合はスキップ
+		if c < 0 or c > N:
+			continue
+
+		# 残りの条件を満たすかを判定
+		if 10000 * a + 5000 * b + 1000 * c == Y:
+			ares, bres, cres = a, b, c
+
+# 出力
+print(ares, bres, cres)
+
+
+●12　Kagami Mochi
+
+［コード5.3.1：例題12の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// バケットのサイズ
+constexpr int M = 101;
+
+int main() {
+	// 入力のサイズ
+	int N;
+	cin >> N;
+
+	// バケット ( 全体を 0 で初期化)
+	vector<int> exist(M, 0);
+
+	// N 個の入力値を受け取りながらバケットを作る
+	for (int i = 0; i < N; ++i) {
+		int d;
+		cin >> d;
+
+	// バケットを更新
+	exist[d] = 1;
+	}
+
+	// exist の総和を求める
+	int result = 0;
+	for (auto val : exist) {
+		result += val;
+	}
+
+	// 出力
+	cout << result << endl;
+}
+
+
+［コード5.3.2：例題12の解答例（Python3）］
+
+# バケットのサイズ
+M = 101
+
+# 入力のサイズ
+N = int(input())
+
+# バケット ( 全体を 0 で初期化)
+exist = [0] * M
+
+# N 個の入力を受け取りながらバケットを作る
+for i in range(N):
+	d = int(input())
+
+	# バケットを更新
+	exist[d] = 1
+
+# exist の総和を求めて出力する
+print(sum(exist))
+
+
+［コード5.3.3：例題12の別解（C++）］
+
+#include <iostream>
+#include <set>
+using namespace std;
+
+int main() {
+	// 入力
+	int N;
+	cin >> N;
+
+	// N 個の入力データを集合S に挿入していく
+	set<int> S;
+	for (int i = 0; i < N; ++i) {
+		int d;
+		cin >> d;
+		S.insert(d);
+	}
+
+	// 集合S のサイズを出力
+	cout << S.size() << endl;
+}
+
+
+［コード5.3.4：例題12の別解（Python3）］
+
+# 入力
+N = int(input())
+
+# N 個の入力データを集合S に挿入していく
+S = set(input() for i in range(N))
+
+# 集合S のサイズを出力
+print(len(S))
+
+
+●13　Green Bin
+
+［コード5.3.7：例題13の解答例（C++）］
+
+#include <iostream>
+#include <map>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	// 入力のサイズ
+	int N;
+	cin >> N;
+
+	// num[s] : 文字列 s が何個あるか
+	map<string, long long> num;
+	for (int i = 0; i < N; ++i) {
+		string s;
+		cin >> s;
+
+		// 文字列 s をソートしておく
+		sort(s.begin(), s.end());
+
+		// インクリメント
+		++num[s];
+	}
+
+	// 集計
+	long long result = 0;
+	for (auto v : num) {
+		// 文字列 v.first が v.second 個ある
+	long long n = v.second;
+
+	// nC2 を足していく
+	result += n * (n - 1) / 2;
+	}
+
+	// 出力
+	cout << result << endl;
+}
+
+
+［コード5.3.8：例題13の解答例（Python3）］
+
+from collections import defaultdict
+
+# 入力のサイズ
+N = int(input())
+
+# num[s] : 文字列 s が何個あるか
+num = defaultdict(int)
+for i in range(N):
+	# 入力の文字列をソートしておく
+	s = "".join(sorted(input()))
+
+	# インクリメント
+	num[s] += 1
+
+# 集計
+result = 0
+for s in num:
+	# 文字列 s が n 個ある
+	n = num[s]
+
+	# nC2 を足していく
+	result += n * (n - 1) // 2
+
+# 出力
+print(result)
+
+［コード5.3.9：例題13のcollections.Counterを用いた解答例］
+
+from collections import Counter
+
+# 入力 ( 各文字列をあらかじめソートしておく)
+N = int(input())
+S = ["".join(sorted(input())) for i in range(N)]
+
+# Counter でヒストグラムを作成
+num = Counter(S)
+
+# 各文字列の個数をn として、nC2 を足していく
+print(sum(n * (n - 1) // 2 for n in num.values()))
+
+
+●14　DoubleCamelCase Sort
+
+［コード5.4.3：例題14の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	// 入力
+	string S;
+	cin >> S;
+
+	// 単語のリスト
+	vector<string> words;
+
+	// 文字列 S を単語ごとに分解する
+	for (int i = 0; i < S.size();) {
+		// 初めて S[j] が大文字になるj を見つける
+		int j = i + 1;
+		while (j < S.size() && islower(S[j])){
+			++j;
+		}
+
+	// 単語を切り出す
+	string word = S.substr(i, j + 1 - i);
+
+	// 先頭と末尾をいったん小文字に変換しておく
+	word[0] = tolower(word[0]);
+	word.back() = tolower(word.back());
+
+	// 単語をリストに追加する
+	words.push_back(word);
+
+	// i を j + 1 に進める
+	i = j + 1;
+	}
+
+	// 単語を辞書順にソートする
+	sort(words.begin(), words.end());
+
+	// 単語を連結する
+	string result = "";
+	for (auto word : words) {
+		// 単語 word の先頭と末尾を大文字に戻す
+		word[0] = toupper(word[0]);
+		word.back() = toupper(word.back());
+
+		// 連結
+		result += word;
+	}
+
+	// 出力
+	cout << result << endl;
+}
+
+
+［コード5.4.4：例題14の解答例（Python3）］
+
+# 入力
+S = input()
+
+# 単語のリスト
+words = []
+
+# 文字列 S を単語ごとに分解する
+i = 0
+while i < len(S):
+	# 初めて S[j] が大文字になるj を見つける
+	j = i + 1
+	while j < len(S) and S[j].islower():
+		j += 1
+
+	# 単語を切り出してリストに追加する
+	words.append(S[i:j + 1])
+
+	# i を j + 1 に進める
+	i = j + 1
+
+# 単語を大文字小文字を無視した状態で辞書順にソートする
+words.sort(key=str.lower)
+
+# 単語を連結して出力する
+print("".join(words))
+
+
+●15　スプリンクラー
+
+［コード5.5.3：例題15の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+	// 頂点数、辺数、クエリ数
+	int N, M, Q;
+	cin >> N >> M >> Q;
+
+	// 頂点数 N のグラフ G を定義
+	vector<vector<int>> G(N);
+
+	// M 本の辺を順に受け取る
+	for (int i = 0; i < M; ++i) {
+		int u, v;
+		cin >> u >> v;
+
+		// 頂点番号を 0 始まりにする
+		--u, --v;
+
+		// グラフに辺を追加
+		G[u].push_back(v);
+		G[v].push_back(u);
+	}
+
+	// 初期状態の各頂点の色
+	vector<int> col(N);
+	for (auto& coli : col) {
+		cin >> coli;
+	}
+
+	// 各クエリに答える
+	for (int i = 0; i < Q; ++i) {
+		int t, x;
+		cin >> t >> x;
+
+		// 頂点番号を 0 始まりにする
+		--x;
+
+		// 頂点 x の色を出力
+		cout << col[x] << endl;
+
+		// タイプ 1 の場合
+		if (t == 1) {
+			// 頂点 x に隣接する各頂点 v の色を更新
+			for (auto v : G[x]) {
+				col[v] = col[x];
+			}
+		}
+		// タイプ 2 の場合
+		else {
+			int y;
+			cin >> y;
+
+			// 頂点 x の色を y に更新
+			col[x] = y;
+		}
+	}
+}
+
+
+［コード5.5.4：例題15の解答例（Python3）］
+
+# 頂点数、辺数、クエリ数
+N, M, Q = map(int, input().split())
+ 
+# 頂点数 N のグラフ G を定義
+G = [[] for i in range(N)]
+ 
+# M 本の辺を順に受け取る
+for i in range(M):
+	u, v = map(int, input().split())
+ 
+	# 頂点番号を 0 始まりにする
+	u -= 1
+	v -= 1
+ 
+	# グラフに辺を追加
+	G[u].append(v)
+	G[v].append(u)
+ 
+# 初期状態の各頂点の色を入力
+col = list(map(int, input().split()))
+ 
+# 各クエリに答える
+for i in range(Q):
+	t, x, *y = map(int, input().split())
+ 
+	# 頂点番号を 0 始まりにする
+	x -= 1
+ 
+	# 頂点 x の色を出力
+	print(col[x])
+ 
+	# タイプ 1 の場合
+	if t == 1:
+		# 頂点 x に隣接する各頂点 v の色を更新
+		for v in G[x]:
+			col[v] = col[x]
+	# タイプ 2 の場合
+	else:
+		# 頂点 x の色を y に更新
+		col[x] = y[0]
+
+
+●16　GeT AC
+
+［コード5.6.3：例題16の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main() {
+	// 入力
+	int N, Q;
+	string S;
+	cin >> N >> Q >> S;
+
+	// 累積和 cs を求める
+	vector<int> cs(N + 1, 0);
+	for (int i = 1; i < N; ++i) {
+		cs[i + 1] = cs[i] + (S.substr(i - 1, 2) == "AC");
+	}
+
+	// 各クエリに答える
+	for (int q = 0; q < Q; ++q) {
+		// 区間を取得
+		int l, r;
+		cin >> l >> r;
+
+		// 右端に 1 を足して、添字を 0 始まりにする
+		--l;
+
+		// 累積和を用いて答えを求める
+		cout << cs[r] - cs[l + 1] << endl;
+	}
+}
+
+
+［コード5.6.4：例題16の解答例（Python3）］
+
+# 入力
+N, Q = map(int, input().split())
+S = input()
+
+# 累積和 cs を求める
+cs = [0] * (N + 1)
+for i in range(1, N):
+	cs[i + 1] = cs[i] + (S[i - 1:i + 1] == "AC")
+
+# 各クエリに答える
+for q in range(Q):
+	# 区間を取得
+	l, r = map(int, input().split())
+
+	# 右端に 1 を足して、添字を 0 始まりにする
+	l -= 1
+
+	# 累積和を用いて答えを求める
+	print(cs[r] - cs[l + 1])
+
+
+●17　Fairness
+
+［コード5.7.1：例題17の解答例（C++）］
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	long long A, B, C, K;
+	cin >> A >> B >> C >> K;
+		if (K % 2 == 0) {
+			cout << A - B << endl;
+	}
+	else {
+		cout << B - A << endl;
+	}
+ }
+
+
+［コード5.7.2：例題17の解答例（Python3）］
+
+A, B, C, K = map(int, input().split())
+print(A - B if K % 2 == 0 else B - A)
+
+
+●18　Traveling
+
+［コード5.8.1：例題18の解答例（C++）］
+
+#include <iostream>
+using namespace std;
+
+// 判定関数
+bool solve() {
+	// プラン数
+	int N;
+	cin >> N;
+
+	// 前回の時刻と座標を表す変数
+	int pt = 0, px = 0, py = 0;
+
+	// N ステップの移動をそれぞれ考える
+	for (int i = 0; i < N; ++i) {
+		// 移動先の情報を入力で受け取る
+		int t, x, y;
+		cin >> t >> x >> y;
+
+		// 前回状態との差分をとる
+		int T = t - pt, X = abs(x - px), Y = abs(y - py);
+
+		// 間に合わないときは不可能
+		if (T < X + Y) {
+			return false;
+		}
+
+		// パリティが合わないときは不可能
+		if (T % 2 != (X + Y) % 2) {
+			return false;
+		}
+
+		// 前回情報を更新
+		pt = t, px = x, py = y;
+	}
+
+	// 最後まで到達
+	return true;
+}
+
+int main() {
+	if (solve()) {
+		cout << "Yes" << endl;
+	}
+	else {
+		cout << "No" << endl;
+	}
+ }
+
+
+［コード5.8.2：例題18の解答例（Python3）］
+
+# 判定関数
+def solve():
+	# プラン数
+	N = int(input())
+
+	# 前回の時刻と座標を表す変数
+	pt, px, py = 0, 0, 0
+
+	# N ステップの移動をそれぞれ考える
+	for i in range(N):
+		# 移動先の情報を入力で受けとる
+		t, x, y = map(int, input().split())
+
+		# 前回状態との差分をとる
+		T, X, Y = t - pt, abs(x - px), abs(y - py)
+
+		# 間に合わないときは不可能
+		if T < X + Y:
+			return False
+
+		#パリティが合わないときは不可能
+		if T % 2 != (X + Y) % 2:
+			return False
+ 
+		# 前回情報を更新
+		pt, px, py = t, x, y
+ 
+	# 最後まで到達
+	return True
+ 
+# 出力
+print("Yes" if solve() else "No")
+
+
+●19　Flipping Signs
+
+［コード5.9.1：例題19の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+	// 入力
+	int N;
+	cin >> N;
+	vector<long long> A(N);
+	for (auto& a : A) {
+		cin >> a;
+	}
+
+	// マイナスの個数
+	int num_minus = 0;
+
+	// N 個の整数の絶対値の総和、最小値
+	long long sum_abs = 0;
+	long long min_abs = 1LL << 60;
+
+	// num_minus, sum_abs, min_abs を求める
+	for (int i = 0; i < N; ++i) {
+		if (A[i] < 0) {
+			++num_minus;
+		}
+		sum_abs += abs(A[i]);
+		min_abs = min(min_abs, abs(A[i]));
+	}
+
+	// マイナスの個数の偶奇に応じて出力
+	if (num_minus % 2 == 0) {
+		cout << sum_abs << endl;
+	}
+	else {
+		cout << sum_abs - min_abs * 2 << endl;
+	}
+}
+
+
+［コード5.9.2：例題19の解答例（Python3）］
+
+# 入力
+N = int(input())
+A = list(map(int, input().split()))
+
+# マイナスの個数
+num_minus = sum(v < 0 for v in A)
+
+# N 個の整数の絶対値の総和、最小値
+sum_abs = sum(map(abs, A))
+min_abs = min(map(abs, A))
+
+# マイナスの個数の偶奇に応じて出力
+print(sum_abs if num_minus % 2 == 0 else sum_abs - min_abs * 2)
+
+
+●20　AB Substrings
+
+［コード5.10.3：例題20の解答例（C++）］
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	// 文字列の個数
+	int N;
+	cin >> N;
+
+	// T, c1, c2, c3 を求める
+	int T = 0, c1 = 0, c2 = 0, c3 = 0;
+	for (int i = 0; i < N; ++i) {
+		// 文字列の入力
+		string S;
+		cin >> S;
+
+		// 最初の文字列中に含まれる "AB" の個数
+		for (int j = 0; j + 1 < S.size(); ++j) {
+			if (S[j] == 'A' && S[j + 1] == 'B') {
+				++T;
+			}
+		}
+
+		// パターン 1
+		if (S[0] == 'B' && S.back() == 'A') {
+			++c1;
+		}
+		// パターン 2
+		else if (S.back() == 'A') {
+			++c2;
+		}
+		// パターン 3
+		else if (S[0] == 'B') {
+			++c3;
+		}
+	}
+
+	// c2, c3 の値に応じて出力
+	if (c2 == 0 && c3 == 0) {
+		cout << T + max(c1 - 1, 0) << endl;
+	}
+	else{
+		cout << T + c1 + min(c2, c3) << endl;
+	}
+}
+
+
+［コード5.10.4：例題20の解答例（Python3）］
+
+# 文字列の個数
+N = int(input())
+
+# T, c1, c2, c3 を求める
+T, c1, c2, c3 = 0, 0, 0, 0
+
+for i in range(N):
+# 文字列の入力
+	S = input()
+
+	# 最初の文字列中に含まれる "AB" の個数
+	T += S.count("AB")
+
+	# パターン 1
+	if S[0] == "B" and S[-1] == "A":
+		c1 += 1
+	# パターン 2
+	elif S[-1] == "A":
+		c2 += 1
+	# パターン 3
+	elif S[0] == "B":
+		c3 += 1
+
+# c2, c3 の値に応じて出力
+if c2 == 0 and c3 == 0:
+	print(T + max(c1 - 1, 0))
+else:
+	print(T + c1 + min(c2, c3))
+
+
+●21　Christmas
+
+［コード6.2.5：例題21の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// 再帰関数
+long long rec(int N, long long X,
+		const vector<long long>& L,
+		const vector<long long>& S) {
+	// 終了条件
+	if (N == 0) {
+		return 1;
+	}
+
+	// X の大きさに応じて場合分けする
+	if (X == 1) {
+		return 0;
+	}
+	else if (X <= L[N - 1] + 1) {
+		return rec(N - 1, X - 1, L, S);
+	}
+	else if (X == L[N - 1] + 2) {
+		return S[N - 1] + 1;
+	}
+	else if (X <= L[N - 1] * 2 + 2) {
+		return rec(N - 1, X - L[N - 1] - 2, L, S)
+			+ S[N - 1] + 1;
+	}
+	else {
+		return S[N - 1] * 2 + 1;
+	}
+}
+
+int main() {
+	// 入力
+	int N;
+	long long X;
+	cin >> N >> X;
+
+	// バーガーの長さ L とパティ数 S
+	vector<long long> L(N + 1, 1), S(N + 1, 1);
+	for (int n = 1; n <= N; ++n) {
+		L[n] = L[n - 1] * 2 + 3;
+		S[n] = S[n - 1] * 2 + 1;
+	}
+
+	// 再帰的に求める
+	cout << rec(N, X, L, S) << endl;
+}
+
+
+［コード6.2.6：例題21の解答例（Python3）］
+
+# 再帰関数
+def rec(N, X, L, S):
+	# 終了条件
+	if N == 0:
+		return 1
+
+	# X の大きさに応じて場合分けする
+	if X == 1:
+		return 0
+	elif X <= L[N - 1] + 1:
+		return rec(N - 1, X - 1, L, S)
+	elif X == L[N - 1] + 2:
+		return S[N - 1] + 1
+	elif X <= L[N - 1] * 2 + 2:
+		return rec(N - 1, X - L[N - 1] - 2, L, S) + S[N - 1] + 1
+	else:
+		return S[N - 1] * 2 + 1
+
+# 入力
+N, X = map(int, input().split())
+
+# バーガーの長さ L とパティ数 S
+L = [1] * (N + 1)
+S = [1] * (N + 1)
+for n in range(1, N + 1):
+	L[n] = L[n - 1] * 2 + 3
+	S[n] = S[n - 1] * 2 + 1
+
+# 再帰的に求める
+print(rec(N, X, L, S))
+
+
+●22　Many Requirements
+
+［コード6.2.14：例題22の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// 入力 （グローバルに置いておく）
+int N, M, Q;
+vector<long long> a, b, c, d;
+
+// 数列 A のスコアを計算する関数
+long long calc_score(const vector<int>& A) {
+	long long score = 0;
+	for (int q = 0; q < Q; ++q) {
+		if (A[b[q]] - A[a[q]] == c[q]) {
+			score += d[q];
+		}
+	}
+	return score;
+}
+
+// 数列 A を全列挙してスコアの最大値を求める再帰関数
+long long rec(vector<int>& A) {
+	// 終了条件
+	if (A.size() == N) {
+		return calc_score(A);
+	}
+
+	// 最大値
+	long long result = 0;
+
+	// 数列 A の前回要素を取得
+	int prev_last = (A.empty() ? 1 : A.back());
+
+	// 数列 A が単調増加になるように末尾に要素を追加する
+	for (int add = prev_last; add <= M; ++add) {
+		// 数列 A に要素追加
+		A.push_back(add);
+
+		// 再帰呼び出しをしながら、スコア最大値を更新
+		result = max(result, rec(A));
+
+		// 数列 A の末尾を削除して元に戻す
+		A.pop_back();
+	}
+
+	// 最大値を返す
+	return result;
+}
+
+int main() {
+	// 入力
+	cin >> N >> M >> Q;
+	a.resize(Q);
+	b.resize(Q);
+	c.resize(Q);
+	d.resize(Q);
+	for (int q = 0; q < Q; ++q) {
+		cin >> a[q] >> b[q] >> c[q] >> d[q];
+
+		// 数列 A の添字 a[q], b[q] を 0 始まりにする
+		--a[q], --b[q];
+	}
+
+	// 数列 A を全列挙して調べる
+	vector<int> A;
+	cout << rec(A) << endl;
+}
+
+
+［コード6.2.15：例題22の解答例（Python3）］
+
+# 入力
+N, M, Q = map(int, input().split())
+a = [0] * Q
+b = [0] * Q
+c = [0] * Q
+d = [0] * Q
+for q in range(Q):
+	a[q], b[q], c[q], d[q] = map(int, input().split())
+ 
+# 数列 A の添字 a[q], b[q] を 0 始まりにする
+	a[q] -= 1
+	b[q] -= 1
+ 
+# 数列 A のスコアを計算する関数
+def calc_score(A):
+	score = 0
+	for ai, bi, ci, di in zip(a, b, c, d):
+		if A[bi] - A[ai] == ci:
+			score += di
+	return score
+ 
+# 数列 A を全列挙してスコアの最大値を求める再帰関数
+def rec(A):
+	# 終了条件
+	if len(A) == N:
+		return calc_score(A)
+ 
+	# 最大値
+	result = 0
+ 
+	# 数列 A の前回要素を取得
+	prev_last = A[-1] if A else 1
+ 
+	# 数列 A が単調増加になるように末尾に要素を追加
+	for add in range(prev_last, M + 1):
+		# 数列 A に要素追加
+		A.append(add)
+ 
+		# 再帰呼び出しをしながら、スコア最大値を更新
+		result = max(result, rec(A))
+ 
+		# 数列 A の末尾を削除して元に戻す
+		A.pop()
+ 
+	# 最大値を返す
+	return result
+ 
+# 数列 A を全列挙して調べる
+A = []
+print(rec(A))
+
+
+●23　Grid Repainting
+
+［コード6.3.3：例題23の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <queue>
+using namespace std;
+
+// 上下左右への移動 (下、右、上、左) を定義しておく
+vector<int> DX = {1, 0, -1, 0};
+vector<int> DY = {0, 1, 0, -1};
+
+int main() {
+	int H, W;
+	cin >> H >> W;
+	vector<string> S(H);
+	for (auto& row : S) {
+		cin >> row;
+	}
+
+	// キューの各要素は、マス (x, y) を表すペアとする
+	// dist[x][y] = マス (x, y) への最短経路長
+	queue<pair<int, int>> que;
+	vector<vector<int>> dist(H, vector<int>(W, -1));
+
+	// 幅優先探索の初期条件
+	que.push({0, 0});
+	dist[0][0] = 0;
+
+	// 幅優先探索
+	while (!que.empty()) {
+		// キューから要素を取り出す
+		pair<int, int> tmp = que.front();
+		int x = tmp.first;
+		int y = tmp.second;
+		que.pop();
+
+		// 上下左右への移動を順に試す
+		for (int dir = 0; dir < 4; ++dir) {
+			int x2 = x + DX[dir], y2 = y + DY[dir];
+
+			// 配列外参照はダメ
+			if (x2 < 0 || x2 >= H || y2 < 0 || y2 >= W) {
+				continue;
+			}
+
+			// 黒マスには進めない
+			if (S[x2][y2] == '#') {
+				continue;
+			}
+
+			// (x2, y2) がすでに探索済みの場合はスキップ
+			if (dist[x2][y2] != -1) {
+				continue;
+			}
+
+			// (x2, y2) をキューに push して、dist を更新
+			que.push({x2, y2});
+			dist[x2][y2] = dist[x][y] + 1;
+		}
+	}
+
+	// 白マス数
+	int white = 0;
+	for (int i = 0; i < H; ++i) {
+		for (int j = 0; j < W; ++j) {
+			if (S[i][j] == '.') {
+				++white;
+			}
+		}
+	}
+
+	// 答えを出力
+	if (dist[H - 1][W - 1] != -1) {
+		cout << white - (dist[H - 1][W - 1] + 1) << endl;
+	}
+	else {
+		cout << -1 << endl;
+	}
+}
+
+
+［コード6.3.4：例題23の解答例（Python3）］
+
+from queue import Queue
+
+# 上下左右への移動 ( 下、右、上、左) を定義しておく
+DX = [1, 0, -1, 0]
+DY = [0, 1, 0, -1]
+
+# 入力
+H, W = map(int, input().split())
+S = [input() for i in range(H)]
+
+# キューの各要素は、マス (x, y) を表すペアとする
+# dist[x][y] = マス (x, y) への最短経路長
+que = Queue()
+dist = [[-1] * W for i in range(H)]
+
+# 幅優先探索の初期条件
+que.put((0, 0))
+dist[0][0] = 0
+
+# 幅優先探索
+while not que.empty():
+	# キューから要素を取り出す
+	x, y = que.get()
+
+	# 上下左右への移動を順に試す
+	for dx, dy in zip(DX, DY):
+		x2, y2 = x + dx, y + dy
+
+		# 配列外参照はダメ
+		if x2 < 0 or x2 >= H or y2 < 0 or y2 >= W:
+			continue
+
+		# 黒マスには進めない
+		if S[x2][y2] == "#":
+			continue
+
+		# (x2, y2) がすでに探索済みの場合はスキップ
+		if dist[x2][y2] != -1:
+			continue
+
+		# (x2, y2) をキューに push して、dist を更新
+		que.put((x2, y2))
+		dist[x2][y2] = dist[x][y] + 1
+
+# 白マス数
+white = sum(line.count('.') for line in S)
+
+# 答えを出力
+if dist[H - 1][W - 1] != -1:
+	print(white - dist[H - 1][W - 1] - 1)
+else:
+	print(-1)
+
+
+●24　白昼夢/ Daydream
+
+［コード6.4.7：例題24の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main() {
+	// 入力
+	string S;
+	cin >> S;
+	int N = S.size(); // 文字列 S のサイズ
+
+	// 動的計画法用の配列
+	vector<bool> dp(N + 1, false);
+
+	// 初期条件
+	dp[0] = true;
+
+	// dp[1], dp[2], ..., dp[N] を順に求める
+	for (int i = 1; i <= N; ++i) {
+		if (i >= 5 && dp[i - 5]
+			&& S.substr(i - 5, 5) == "erase") {
+			dp[i] = true;
+		}
+		if (i >= 6 && dp[i - 6]
+			&& S.substr(i - 6, 6) == "eraser") {
+			dp[i] = true;
+		}
+		if (i >= 5 && dp[i - 5]
+			&& S.substr(i - 5, 5) == "dream") {
+			dp[i] = true;
+		}
+		if (i >= 7 && dp[i - 7]
+			&& S.substr(i - 7, 7) == "dreamer") {
+			dp[i] = true;
+		}
+	}
+
+	// 出力
+	if (dp[N]) {
+		cout << "YES" << endl;
+	}
+	else{
+		cout << "NO" << endl;
+	}
+}
+
+
+［コード6.4.8：例題24の解答例（Python3）］
+
+# 入力
+S = input()
+N = len(S) # 文字列S の長さ
+
+# 動的計画法用の配列
+dp = [False] * (N + 1)
+
+# 初期条件
+dp[0] = True
+
+# dp[1], dp[2], ..., dp[N] を順に求める
+for i in range(N + 1):
+	if i >= 5 and dp[i - 5] and S[i - 5:i] == "erase":
+		dp[i] = True
+	if i >= 6 and dp[i - 6] and S[i - 6:i] == "eraser":
+		dp[i] = True
+	if i >= 5 and dp[i - 5] and S[i - 5:i] == "dream":
+		dp[i] = True
+	if i >= 7 and dp[i - 7] and S[i - 7:i] == "dreamer":
+		dp[i] = True
+
+# 出力
+print("YES" if dp[N] else "NO")
+
+
+●25　Boxes and Candies
+
+［コード6.5.1：例題25の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+	// 入力
+	int N;
+	long long x;
+	cin >> N >> x;
+	vector<long long> a(N);
+	for (auto& ai : a) {
+		cin >> ai;
+	}
+
+	// 答えを表す変数
+	long long result = 0;
+
+	// 先頭要素のみ x からの超過分を先に食べておく
+	if (a[0] > x) {
+		result += a[0] - x;
+		a[0] = x;
+	}
+
+	// 左端から順に処理していく
+	for (int i = 0; i + 1 < N; ++i) {
+		if (a[i] + a[i + 1] > x) {
+			result += a[i] + a[i + 1] - x;
+			a[i + 1] = x - a[i];
+		}
+	}
+
+	// 出力
+	cout << result << endl;
+}
+
+
+［コード6.5.2：例題25の解答例（Python3）］
+
+# 入力
+N, x = map(int, input().split())
+a = list(map(int, input().split()))
+
+# 答えを表す変数
+result = 0
+
+# 先頭要素のみ x からの超過分を先に食べておく
+if a[0] > x:
+	result += a[0] - x
+	a[0] = x
+
+# 左端から順に処理していく
+for i in range(N - 1):
+	if a[i] + a[i + 1] > x:
+		result += a[i] + a[i + 1] - x
+		a[i + 1] = x - a[i]
+
+# 出力
+print(result)
+
+
+●26　Summer Vacation
+
+［コード6.5.3：例題26の解答例（C++）］
+
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+int main() {
+	// 入力
+	int N, M;
+	cin >> N >> M;
+
+	// AtoB[v] : A[i] = v となる i に対する B[i] の集合
+	vector<vector<int>> AtoB(M + 1);
+	for (int i = 0; i < N; ++i) {
+		// 仕事の入力
+		int A, B;
+		cin >> A >> B;
+
+		// 報酬支払いが M 日を超える場合は無意味
+		if (A > M) {
+			continue;
+		}
+
+		// データ登録
+		AtoB[A].push_back(B);
+	}
+
+	// 報酬の最大値を表す変数
+	long long result = 0;
+
+	// ヒープ
+	priority_queue<long long> que;
+
+	// M - 1 日目から 0 日目へと遡る (AtoB[0] から順に見る)
+	for (auto Bs : AtoB) {
+		// ヒープに遡った分の仕事を追加する
+		for (auto B : Bs) {
+			que.push(B);
+		}
+
+		// ヒープが空でなければ報酬最大の仕事を答えに足す
+		if (!que.empty()) {
+			// ヒープに含まれる値の最大値を足す
+			result += que.top();
+
+			// ヒープに含まれる値が最大の要素を削除する
+			que.pop();
+		}
+	}
+
+	// 出力
+	cout << result << endl;
+}
+
+
+［コード6.5.4：例題26の解答例（Python3）］
+
+from heapq import heappush, heappop
+
+# 入力
+N, M = map(int, input().split())
+
+# AtoB[v] : A[i] = v となる i に対する B[i] の集合
+AtoB = [[] for i in range(M + 1)]
+for i in range(N):
+	# 仕事の入力
+	A, B = map(int, input().split())
+
+	# 報酬支払いが M 日を超える場合は無意味
+	if A > M:
+		continue
+
+	# データ登録
+	AtoB[A].append(B)
+
+# 報酬の最大値を表す変数
+result = 0
+ 
+# ヒープ
+que = []
+ 
+# M - 1 日目から 0 日目へと遡る (AtoB[0] から順に見る)
+for Bs in AtoB:
+	# ヒープに遡った分の仕事を追加する
+	for B in Bs:
+		#Python3 のヒープは小さい順なので符号反転して追加
+		heappush(que, -B)
+
+	# ヒープが空でなければ報酬最大の仕事を答えに足す
+	if que:
+		result -= heappop(que)
+ 
+# 出力
+print(result)
